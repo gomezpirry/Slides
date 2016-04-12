@@ -1,0 +1,35 @@
+\mode<presentation>
+
+\usepackage{ragged2e}
+\usepackage{graphicx}
+\definecolor{mmvlabRed}{RGB}{153,0,0}
+
+\setbeamertemplate{sections/subsections in toc}[square]
+
+% Title page
+\defbeamertemplate*{title page}{mmvlab}[1][]
+{ 
+\vskip1cm%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.5cm]{frametitle} 
+  \begin{tikzpicture}
+  \useasboundingbox[fill=white](0,0) rectangle(\the\paperwidth,0.8);
+  \fill[color=mmvlabRed] (0.1,-0.85) rectangle(0.5,1.1);
+  \path (0.5,-1.8) node[anchor= south west]{\includegraphics[scale=0.4]{images/logouv.eps}}; 
+  \path (2.8,-1.1) node[anchor= south west]{\includegraphics[scale=0.3]{images/header1.eps}}; 
+  \path (11.1,-1.4) node[anchor= south west]{\includegraphics[scale=0.2]{images/mmvlab.eps}};
+  \fill[color=mmvlabRed] (15.5,-0.85) rectangle(15.9,1.1);
+  \end{tikzpicture}
+  \end{beamercolorbox}
+   \vskip2cm%
+    \begin{beamercolorbox}[wd=0.85\paperwidth,leftskip=0cm,sep=8pt,#1]{title page header}
+      \usebeamerfont{title}\justifying \inserttitle\par%
+    \end{beamercolorbox}%
+    \vskip0.5cm%
+    \begin{beamercolorbox}[wd=0.9\paperwidth,leftskip=1cm,#1]{author}
+      \usebeamerfont{author}\insertauthor%
+    \end{beamercolorbox}%
+  \vfill
+}
+
+\mode
+<all>

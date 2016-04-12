@@ -1,0 +1,99 @@
+\mode<presentation>
+
+\usepackage{graphicx}
+\usepackage{varwidth}
+\usepackage{xcolor}
+
+\definecolor{mmvlabRed}{RGB}{153,0,0}
+\definecolor{mmvlabGray}{RGB}{168,168,168}
+\definecolor{softgray}{RGB}{230,230,230}
+
+%command to add foot text 
+\newcommand\foot[1]{\gdef\insertfoot{#1}}
+\foot{}
+  
+\newcommand{\FU@footline}{
+\color{mmvlabGray}{\insertfoot}}
+  
+%Reset the foot in new frame  
+\let\beamer@original@frame=\frame
+\def\frame{\gdef\insertfoot{}\beamer@original@frame}
+\foot{}
+
+%define figure of logouv
+\def\logouv{
+	\begin{beamercolorbox}[wd=0.4cm,ht=0.2cm,dp=1ex]{logouv}	{\includegraphics[scale=0.15]{images/logouv.eps}}
+	\end{beamercolorbox}
+}
+
+%define figure of mmvlab logo
+\def\mmvlab{
+	\begin{beamercolorbox}[wd=0.4cm,ht=0.2cm,dp=1ex]{logouv}		{\includegraphics[scale=0.08]{images/mmvlab.eps}}
+	\end{beamercolorbox}
+}
+
+
+\setbeamercolor{footlinerule}{bg=lightgray}
+
+
+%footline template  
+\defbeamertemplate*{footline}{mmvlab}{
+	\hskip0.6cm
+	\begin{beamercolorbox}[wd=0.9\paperwidth,ht=0.5ex,dp=0ex,left,leftskip=5ex]{footlinerule}
+	\end{beamercolorbox}
+	\vskip1pt
+ 	\begin{beamercolorbox}[wd=\paperwidth,ht=4.5ex,dp=2ex,left]{foot}
+  		\parbox{14cm}{\vspace*{-2pt} \hspace*{0.6cm}\usebeamerfont{footline}\FU@footline\par} Slide \insertframenumber{} 
+  	\end{beamercolorbox}
+}
+
+%footline diagram template 
+\defbeamertemplate*{footline}{diagram}[1][]
+{
+	\hskip0.2cm
+	\begin{beamercolorbox}[wd=\paperwidth,ht=4.5ex,dp=2ex, rightskip=.3cm plus1fil]{separation line}
+     	\logouv \parbox{11.7cm}{\vspace*{-6pt} \hspace*{0.6cm}\usebeamerfont{footline}\FU@footline\par}\hspace{0.2cm} Slide \insertpagenumber \hspace{0.3cm} \mmvlab
+    \end{beamercolorbox}
+}
+
+
+%template diagram frame
+\defbeamertemplate*{frametitle}{diagram}[1][]{
+	\setbeamerfont{titleframe}{}
+	\vskip1cm
+ 	\begin{beamercolorbox}[wd=\paperwidth,ht=0.3cm]{frametitle} 
+  		\begin{tikzpicture}
+  		\useasboundingbox[fill=white](0,0) rectangle(\the\paperwidth,0.8);
+  		\fill[color=mmvlabRed] (0,0) rectangle(9.2,1.8);
+        \fill[color=softgray] (0,-1) rectangle (0.5,-5.5);
+        \fill[color=softgray] (15.5,-1) rectangle (16,-5.5);
+  		{\node[anchor=center, white, align=center, font=\large, text width=15em] at (5,1){\insertframetitle};}       
+   		\ifx\insertsubsection\@empty 
+    		{\node[anchor=center, black, align=center, font=\large, text width=12em] at (12.8,1){\color{black}{\insertsection}};}
+    	\else 
+       		{\node[anchor=center, black, align=center, font=\large, text width=12em] at (12.8,1){\color{black}{\insertsubsection}};}
+    \fi
+  		\end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+  
+%Template frame
+\defbeamertemplate*{frametitle}{mmvlab}[1][]{
+	\vskip1cm
+  	\begin{beamercolorbox}[wd=\paperwidth,ht=0.3cm]{frametitle} 
+  		\begin{tikzpicture}
+  			\useasboundingbox[fill=white](0,0) rectangle(\the\paperwidth,0.8);
+  			\fill[color=mmvlabRed] (0,0.1) rectangle(0.4,1.4);
+  			\path (0.35,-0.2) node[anchor= south west]{\includegraphics[scale=0.2]{images/logouv.eps}}; 
+  			\path (1.6,-0.1) node[anchor= south west]{\includegraphics[scale=0.35]{images/header2.eps}};
+  			\path (13.5,-0.2) node[anchor= south west]{\includegraphics[scale=0.11]{images/mmvlab.eps}}; 
+  			{\node[anchor=west, mmvlabRed,font=\large] at (1,-0.7)		{\begin{varwidth}{\textwidth}\insertframetitle \end{varwidth}};}
+            \shade[left color=mmvlabRed]            
+  (0.5,-1.35) -- ++(-1pt,1pt) -- ++(15,0) -- ++(0,-1pt) -- cycle; 
+  		\end{tikzpicture}        
+  \end{beamercolorbox}
+  \vskip2ex
+}
+
+\mode<all>
